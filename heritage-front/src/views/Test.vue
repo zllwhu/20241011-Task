@@ -1,5 +1,10 @@
 <template>
   <div>
+
+    <div>
+      <el-button type="primary" @click="router.back()">返回主页</el-button>
+    </div>
+
     <div style="margin-bottom: 20px">
       <el-input clearable v-model="data.input" style="width: 240px" placeholder="Please input here"
                 :prefix-icon="Search"/>
@@ -7,6 +12,7 @@
       <el-input style="width: 240px" :suffix-icon="Calendar"/>
       <el-input type="textarea" style="width: 240px"/>
     </div>
+
     <div style="margin-bottom: 20px">
       <el-select multiple clearable v-model="data.value" placeholder="Select" style="width: 240px">
         <el-option v-for="item in data.option" :key="item.id" :label="item.label" :value="item.name"/>
@@ -41,54 +47,62 @@
     <div style="margin-bottom: 20px">
       <el-image :src="img0" :preview-src-list="[img1, img2, img3]" style="width: 100px; height: 100px"/>
     </div>
-  </div>
 
-  <div style="margin-bottom: 20px">
-    <el-carousel arrow="always" trigger="click" height="500px" style="width: 500px">
-      <el-carousel-item v-for="item in data.imgs" :key="item">
-        <img style="width: 100%" :src="item"/>
-      </el-carousel-item>
-    </el-carousel>
-  </div>
+    <div style="margin-bottom: 20px">
+      <el-carousel arrow="always" trigger="click" height="500px" style="width: 500px">
+        <el-carousel-item v-for="item in data.imgs" :key="item">
+          <img style="width: 100%" :src="item"/>
+        </el-carousel-item>
+      </el-carousel>
+    </div>
 
-  <div style="margin-bottom: 20px">
-    <el-date-picker v-model="data.date" type="date" placeholder="Pick a day" format="YYYY-MM-DD"
-                    value-format="YYYY-MM-DD"/>
-    {{ data.date }}
-    <el-date-picker style="margin-left: 50px" v-model="data.date1" type="datetime" placeholder="Pick a daytime"
-                    format="YYYY-MM-DD HH:mm:ss" value-format="YYYY-MM-DD HH:mm:ss"/>
-    {{ data.date1 }}
-  </div>
+    <div style="margin-bottom: 20px">
+      <el-date-picker v-model="data.date" type="date" placeholder="Pick a day" format="YYYY-MM-DD"
+                      value-format="YYYY-MM-DD"/>
+      {{ data.date }}
+      <el-date-picker style="margin-left: 50px" v-model="data.date1" type="datetime" placeholder="Pick a daytime"
+                      format="YYYY-MM-DD HH:mm:ss" value-format="YYYY-MM-DD HH:mm:ss"/>
+      {{ data.date1 }}
+    </div>
 
-  <div style="margin-bottom: 20px">
-    <el-date-picker v-model="data.daterange" type="daterange" , placeholder="Pick a date range" format="YYYY-MM-DD"
-                    value-format="YYYY-MM-DD"/>
-    {{ data.daterange }}
-    <el-time-picker style="margin-left: 50px" v-model="data.time" placeholder="Pick a time" format="HH:mm:ss"
-                    value-format="HH:mm:ss"/>
-    {{ data.time }}
-  </div>
+    <div style="margin-bottom: 20px">
+      <el-date-picker v-model="data.daterange" type="daterange" , placeholder="Pick a date range" format="YYYY-MM-DD"
+                      value-format="YYYY-MM-DD"/>
+      {{ data.daterange }}
+      <el-time-picker style="margin-left: 50px" v-model="data.time" placeholder="Pick a time" format="HH:mm:ss"
+                      value-format="HH:mm:ss"/>
+      {{ data.time }}
+    </div>
 
-  <div style="margin-bottom: 20px">
-    <el-table :data="data.tableData" style="width: 600px" border stripe>
-      <el-table-column prop="date" label="Date" width="200"/>
-      <el-table-column prop="name" label="Name" width="100"/>
-      <el-table-column prop="address" label="Address" width="300"/>
-      <el-table-column fixed="right" label="Operations" min-width="120">
-        <template #default>
-          <el-button link type="primary" size="small" @click="handleClick">Detail</el-button>
-          <el-button link type="primary" size="small">Edit</el-button>
-        </template>
-      </el-table-column>
-    </el-table>
-    <div style="padding-bottom: 20px">
-      <el-pagination
-          v-model:current-page="data.currentPage"
-          v-model:page-size="data.pageSize"
-          :page-sizes="[5, 10, 15, 20]"
-          layout="total, sizes, prev, pager, next, jumper"
-          :total="data.tableData.length"
-      />
+    <div style="margin-bottom: 20px">
+      <el-table :data="data.tableData" style="width: 600px" border stripe>
+        <el-table-column prop="date" label="Date" width="200"/>
+        <el-table-column prop="name" label="Name" width="100"/>
+        <el-table-column prop="address" label="Address" width="300"/>
+        <el-table-column fixed="right" label="Operations" min-width="120">
+          <template #default>
+            <el-button link type="primary" size="small" @click="handleClick">Detail</el-button>
+            <el-button link type="primary" size="small">Edit</el-button>
+          </template>
+        </el-table-column>
+      </el-table>
+      <div style="padding-bottom: 20px">
+        <el-pagination
+            v-model:current-page="data.currentPage"
+            v-model:page-size="data.pageSize"
+            :page-sizes="[5, 10, 15, 20]"
+            layout="total, sizes, prev, pager, next, jumper"
+            :total="data.tableData.length"
+        />
+      </div>
+    </div>
+
+    <div style="margin-bottom: 20px">
+      {{ data.id }}
+    </div>
+
+    <div style="margin-bottom: 20px">
+      {{ data.name }}
     </div>
   </div>
 </template>
@@ -100,12 +114,15 @@ import img0 from '@/assets/img/logo.svg'
 import img1 from '@/assets/img/1.png'
 import img2 from '@/assets/img/2.png'
 import img3 from '@/assets/img/3.png'
+import router from "@/router/index.js";
 
 const handleClick = () => {
   console.log('click')
 }
 
 const data = reactive({
+  id: router.currentRoute.value.query.id,
+  name: router.currentRoute.value.query.name,
   input: '',
   value: '',
   option: [{id: 1, label: 'apple', name: '0001'}, {id: 2, label: 'banana', name: '0002'}, {
@@ -180,5 +197,7 @@ const data = reactive({
     },
   ]
 })
+
+console.log('获取id' + data.id)
 
 </script>
