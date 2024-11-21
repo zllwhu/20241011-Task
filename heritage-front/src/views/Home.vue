@@ -46,4 +46,15 @@
 <script setup>
 import {Edit, View} from "@element-plus/icons-vue";
 import router from "@/router/index.js";
+import request from "@/utils/request.js";
+import {reactive} from "vue";
+
+const data = reactive({
+  employeeList: []
+})
+
+request.get('/employee/selectAll').then(res => {
+  console.log(res)
+  data.employeeList = res.data
+})
 </script>

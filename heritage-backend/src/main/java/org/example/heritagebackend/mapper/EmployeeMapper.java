@@ -7,7 +7,7 @@ import org.example.heritagebackend.entity.Employee;
 import java.util.List;
 
 public interface EmployeeMapper {
-    List<Employee> selectAll();
+    List<Employee> selectAll(Employee employee);
 
     @Select("SELECT * FROM employee WHERE id = #{id}")
     Employee selectById(Integer id);

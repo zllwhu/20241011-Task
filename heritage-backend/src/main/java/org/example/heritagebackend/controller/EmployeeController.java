@@ -16,8 +16,8 @@ public class EmployeeController {
     private EmployeeService employeeService;
 
     @GetMapping("/selectAll")
-    public Result selectAll() {
-        List<Employee> employeeList = employeeService.selectAll();
+    public Result selectAll(Employee employee) {
+        List<Employee> employeeList = employeeService.selectAll(employee);
         return Result.success(employeeList);
     }
 
@@ -28,9 +28,10 @@ public class EmployeeController {
     }
 
     @GetMapping("/selectPage")
-    public Result selectPage(@RequestParam(defaultValue = "1") Integer pageNum,
+    public Result selectPage(Employee employee,
+                             @RequestParam(defaultValue = "1") Integer pageNum,
                              @RequestParam(defaultValue = "10") Integer pageSize) {
-        PageInfo<Employee> pageInfo = employeeService.selectPage(pageNum, pageSize);
+        PageInfo<Employee> pageInfo = employeeService.selectPage(employee, pageNum, pageSize);
         return Result.success(pageInfo);
     }
 

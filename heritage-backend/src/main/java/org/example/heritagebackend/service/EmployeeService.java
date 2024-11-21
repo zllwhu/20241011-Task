@@ -14,17 +14,17 @@ public class EmployeeService {
     @Resource
     private EmployeeMapper employeeMapper;
 
-    public List<Employee> selectAll() {
-        return employeeMapper.selectAll();
+    public List<Employee> selectAll(Employee employee) {
+        return employeeMapper.selectAll(employee);
     }
 
     public Employee selectById(Integer id) {
         return employeeMapper.selectById(id);
     }
 
-    public PageInfo<Employee> selectPage(Integer pageNum, Integer pageSize) {
+    public PageInfo<Employee> selectPage(Employee employee, Integer pageNum, Integer pageSize) {
         PageHelper.startPage(pageNum, pageSize);
-        List<Employee> employees = employeeMapper.selectAll();
+        List<Employee> employees = employeeMapper.selectAll(employee);
         return PageInfo.of(employees);
     }
 
