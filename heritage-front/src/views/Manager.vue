@@ -41,11 +41,18 @@
             <el-menu-item index="/manager/employee">普通用户信息</el-menu-item>
           </el-sub-menu>
 
-          <el-menu-item index="1">
+          <el-menu-item index="person">
             <el-icon>
               <Tickets/>
             </el-icon>
             个人信息
+          </el-menu-item>
+
+          <el-menu-item index="password">
+            <el-icon>
+              <Lock/>
+            </el-icon>
+            修改密码
           </el-menu-item>
 
           <el-menu-item @click="handleQuit">
@@ -57,14 +64,14 @@
         </el-menu>
       </div>
       <div style="flex: 1; width: 0; padding: 10px">
-        <RouterView/>
+        <RouterView @updateUser="updateUser"/>
       </div>
     </div>
   </div>
 </template>
 
 <script setup>
-import {DataLine, House, SwitchButton, Tickets, User} from "@element-plus/icons-vue";
+import {DataLine, House, Lock, SwitchButton, Tickets, User} from "@element-plus/icons-vue";
 import router from "@/router/index.js";
 import {reactive} from "vue";
 import {ElMessage} from "element-plus";
@@ -80,5 +87,9 @@ const handleQuit = () => {
   setTimeout(() => {
     location.href = '/login'
   }, 200)
+}
+
+const updateUser = () => {
+  data.user = JSON.parse(localStorage.getItem("heritage-user"))
 }
 </script>

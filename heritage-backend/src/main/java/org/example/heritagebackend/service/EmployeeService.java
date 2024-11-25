@@ -5,6 +5,7 @@ import com.github.pagehelper.PageHelper;
 import com.github.pagehelper.PageInfo;
 import jakarta.annotation.Resource;
 import org.example.heritagebackend.entity.Account;
+import org.example.heritagebackend.entity.Admin;
 import org.example.heritagebackend.entity.Employee;
 import org.example.heritagebackend.exception.CustomException;
 import org.example.heritagebackend.mapper.EmployeeMapper;
@@ -70,5 +71,15 @@ public class EmployeeService {
 
     public void register(Employee employee) {
         this.add(employee);
+    }
+
+    public void updatePassword(Account account) {
+        Integer id = account.getId();
+        Employee dbEmployee = employeeMapper.selectById(id);
+        if (!dbEmployee.getPassword().equals(account.getPassword())) {
+            throw new CustomException("500", "原密码错误");
+        }
+        dbEmployee.setPassword(account.getNewPassword());
+        employeeMapper.updateById(dbEmployee);
     }
 }

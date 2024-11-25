@@ -37,6 +37,18 @@ const router = createRouter({
                     meta: {title: '管理员信息页面', needLogin: true},
                     component: () => import('../views/Admin.vue')
                 },
+                {
+                    path: 'person',
+                    name: 'person',
+                    meta: {title: '个人信息页面', needLogin: true},
+                    component: () => import('../views/Person.vue')
+                },
+                {
+                    path: 'password',
+                    name: 'password',
+                    meta: {title: '修改密码页面', needLogin: true},
+                    component: () => import('../views/Password.vue')
+                },
             ]
         },
         {path: '/login', name: 'login', meta: {title: '登录系统'}, component: () => import('../views/Login.vue')},

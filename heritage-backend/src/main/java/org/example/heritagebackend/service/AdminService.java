@@ -67,4 +67,14 @@ public class AdminService {
         }
         return dbAdmin;
     }
+
+    public void updatePassword(Account account) {
+        Integer id = account.getId();
+        Admin dbAdmin = adminMapper.selectById(id);
+        if (!dbAdmin.getPassword().equals(account.getPassword())) {
+            throw new CustomException("500", "原密码错误");
+        }
+        dbAdmin.setPassword(account.getNewPassword());
+        adminMapper.updateById(dbAdmin);
+    }
 }
