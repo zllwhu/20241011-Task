@@ -4,12 +4,15 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="org.example.heritagebackend.mapper.EmployeeMapper">
     <insert id="add" parameterType="org.example.heritagebackend.entity.Employee">
-        INSERT INTO employee (name, sex, no, age, description, department_id)
-        VALUES (#{name}, #{sex}, #{no}, #{age}, #{description}, #{departmentId})
+        INSERT INTO employee (username, password, role, name, sex, no, age, description, department_id)
+        VALUES (#{username}, #{password}, #{role}, #{name}, #{sex}, #{no}, #{age}, #{description}, #{departmentId})
     </insert>
     <update id="updateById" parameterType="org.example.heritagebackend.entity.Employee">
         UPDATE employee
-        SET name          = #{name},
+        SET username      = #{username},
+            password      = #{password},
+            role          = #{role},
+            name          = #{name},
             sex           = #{sex},
             no            = #{no},
             age           = #{age},

@@ -12,11 +12,6 @@
         <el-table :data="data.tableData">
           <el-table-column label="账号" prop="username"/>
           <el-table-column label="姓名" prop="name"/>
-          <el-table-column label="性别" prop="sex"/>
-          <el-table-column label="学号" prop="no"/>
-          <el-table-column label="年龄" prop="age"/>
-          <el-table-column label="个人介绍" prop="description" show-overflow-tooltip/>
-          <el-table-column label="部门" prop="departmentName"/>
           <el-table-column label="操作">
             <template #default="scope">
               <el-button @click="handleUpdate(scope.row)" link type="primary" :icon="Edit">编辑</el-button>
@@ -36,7 +31,7 @@
         </div>
       </el-card>
     </div>
-    <el-dialog v-model="data.formVisible" title="普通用户信息" width="600" destroy-on-close>
+    <el-dialog v-model="data.formVisible" title="管理员信息" width="600" destroy-on-close>
       <el-form ref="formRef" :rules="data.rules" :model="data.form" label-width="auto"
                style="padding-right: 20px; padding-top: 20px">
         <el-form-item label="账号：" label-position="right" prop="username">
@@ -44,22 +39,6 @@
         </el-form-item>
         <el-form-item label="姓名：" label-position="right" prop="name">
           <el-input v-model="data.form.name" autocomplete="off" placeholder="请输入姓名"/>
-        </el-form-item>
-        <el-form-item label="性别：" label-position="right">
-          <el-radio-group v-model="data.form.sex">
-            <el-radio value="男" label="男"/>
-            <el-radio value="女" label="女"/>
-          </el-radio-group>
-        </el-form-item>
-        <el-form-item label="学号：" label-position="right" prop="no">
-          <el-input v-model="data.form.no" autocomplete="off" placeholder="请输入学号"/>
-        </el-form-item>
-        <el-form-item label="年龄：" label-position="right">
-          <el-input-number :min="18" style="width: 180px" v-model="data.form.age" autocomplete="off" placeholder="请输入年龄"/>
-        </el-form-item>
-        <el-form-item label="个人介绍：" label-position="right">
-          <el-input :rows="3" type="textarea" v-model="data.form.description" autocomplete="off"
-                    placeholder="请输入个人介绍"/>
         </el-form-item>
       </el-form>
       <template #footer>
@@ -92,9 +71,6 @@ const data = reactive({
     ],
     name: [
       {required: true, message: '请输入姓名', trigger: 'blur'},
-    ],
-    no: [
-      {required: true, message: '请输入学号', trigger: 'blur'},
     ]
   }
 })
@@ -102,7 +78,7 @@ const data = reactive({
 const formRef = ref()
 
 const load = () => {
-  request.get('/employee/selectPage', {
+  request.get('/admin/selectPage', {
     params: {
       pageNum: data.pageNum,
       pageSize: data.pageSize,
@@ -139,7 +115,7 @@ const cancel = () => {
 }
 
 const add = () => {
-  request.post('/employee/add', data.form).then(res => {
+  request.post('/admin/add', data.form).then(res => {
     if (res.code === '200') {
       data.formVisible = false
       ElMessage.success('操作成功')
@@ -151,7 +127,7 @@ const add = () => {
 }
 
 const update = () => {
-  request.put('/employee/update', data.form).then(res => {
+  request.put('/admin/update', data.form).then(res => {
     if (res.code === '200') {
       data.formVisible = false
       ElMessage.success('操作成功')
@@ -169,7 +145,7 @@ const handleUpdate = (row) => {
 
 const del = (id) => {
   ElMessageBox.confirm('删除数据后无法恢复，是否确认删除？', '删除确认', {type: 'warning'}).then(() => {
-    request.delete('/employee/deleteById/' + id).then(res => {
+    request.delete('/admin/deleteById/' + id).then(res => {
       if (res.code === '200') {
         data.formVisible = false
         ElMessage.success('操作成功')

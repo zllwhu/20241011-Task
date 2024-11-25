@@ -3,13 +3,13 @@
     <div style="height: 60px; background-color: #409eff; display: flex; align-items: center">
       <div style="width: fit-content; display: flex; align-items: center; padding-left: 20px">
         <img style="width: 35px" src="@/assets/img/logo.png" alt=""/>
-        <span style="margin-left: 10px; font-size: 24px; color: white;">湖北省校园文化遗产数字信息管理系统</span>
+        <span style="margin-left: 10px; font-size: 24px; color: white;">湖北省校园文化遗产数字信息管理后台</span>
       </div>
       <div style="flex: 1"/>
       <div style="width: fit-content; display: flex; align-items: center; padding-right: 20px;">
         <img src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" alt=""
              style="width: 40px; height: 40px"/>
-        <span style="color: white; margin-left: 10px; font-size: 16px">zllwhu</span>
+        <span style="color: white; margin-left: 10px; font-size: 16px">{{ data.user.name }}</span>
       </div>
     </div>
 
@@ -37,8 +37,8 @@
               </el-icon>
               <span>用户管理</span>
             </template>
-            <el-menu-item>管理员信息</el-menu-item>
-            <el-menu-item index="/manager/employee">员工信息</el-menu-item>
+            <el-menu-item index="/manager/admin">管理员信息</el-menu-item>
+            <el-menu-item index="/manager/employee">普通用户信息</el-menu-item>
           </el-sub-menu>
 
           <el-menu-item index="1">
@@ -48,7 +48,7 @@
             个人信息
           </el-menu-item>
 
-          <el-menu-item index="1">
+          <el-menu-item @click="handleQuit">
             <el-icon>
               <SwitchButton/>
             </el-icon>
@@ -66,4 +66,19 @@
 <script setup>
 import {DataLine, House, SwitchButton, Tickets, User} from "@element-plus/icons-vue";
 import router from "@/router/index.js";
+import {reactive} from "vue";
+import {ElMessage} from "element-plus";
+
+const data = reactive({
+  user: JSON.parse(localStorage.getItem("heritage-user"))
+})
+
+const handleQuit = () => {
+  localStorage.removeItem('token')
+  localStorage.removeItem('heritage-user')
+  ElMessage.success('退出成功')
+  setTimeout(() => {
+    location.href = '/login'
+  }, 200)
+}
 </script>

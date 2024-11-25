@@ -18,4 +18,7 @@ public interface EmployeeMapper {
 
     @Delete("DELETE FROM employee WHERE id = #{id}")
     void deleteById(Integer id);
+
+    @Select("SELECT * FROM employee WHERE username = #{username}")
+    Employee selectByUsername(String username);
 }
