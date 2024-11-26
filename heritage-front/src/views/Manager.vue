@@ -7,8 +7,8 @@
       </div>
       <div style="flex: 1"/>
       <div style="width: fit-content; display: flex; align-items: center; padding-right: 20px;">
-        <img src="https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png" alt=""
-             style="width: 40px; height: 40px"/>
+        <img :src="data.user.avatar || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'" alt=""
+             style="width: 40px; height: 40px; border-radius: 50%"/>
         <span style="color: white; margin-left: 10px; font-size: 16px">{{ data.user.name }}</span>
       </div>
     </div>
@@ -23,14 +23,14 @@
             系统首页
           </el-menu-item>
 
-          <el-menu-item index="/manager/data">
+          <el-menu-item index="/manager/data" v-if="data.user.role === 'ADMIN'">
             <el-icon>
               <DataLine/>
             </el-icon>
             数据统计
           </el-menu-item>
 
-          <el-sub-menu index="1">
+          <el-sub-menu index="1" v-if="data.user.role === 'ADMIN'">
             <template #title>
               <el-icon>
                 <User/>

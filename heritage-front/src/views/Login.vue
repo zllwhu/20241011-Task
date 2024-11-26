@@ -58,9 +58,15 @@ const login = () => {
           localStorage.setItem('heritage-user', JSON.stringify(res.data))
           localStorage.setItem('token', res.data.username)
           ElMessage.success('登录成功')
-          setTimeout(() => {
-            location.href = '/manager/home'
-          }, 200)
+          if (data.form.role === 'ADMIN') {
+            setTimeout(() => {
+              location.href = '/manager/home'
+            }, 200)
+          } else {
+            setTimeout(() => {
+              location.href = '/front/home'
+            }, 200)
+          }
         } else {
           ElMessage.error(res.msg)
         }

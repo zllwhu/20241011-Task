@@ -51,6 +51,22 @@ const router = createRouter({
                 },
             ]
         },
+        {
+            path: '/front', component: () => import('../views/Front.vue'), children: [
+                {
+                    path: 'home',
+                    name: 'front-home',
+                    meta: {title: '平台主页', needLogin: true},
+                    component: () => import('../views/FrontHome.vue')
+                },
+                {
+                    path: 'about',
+                    name: 'front-about',
+                    meta: {title: '关于平台', needLogin: true},
+                    component: () => import('../views/FrontAbout.vue')
+                },
+            ]
+        },
         {path: '/login', name: 'login', meta: {title: '登录系统'}, component: () => import('../views/Login.vue')},
         {path: '/register', name: 'register', meta: {title: '注册系统'}, component: () => import('../views/Register.vue')},
         {path: '/404', name: '404', meta: {title: '404找不到页面'}, component: () => import('../views/404.vue')},

@@ -11,6 +11,12 @@
       <el-card shadow="never" style="margin-bottom: 10px">
         <el-table :data="data.tableData">
           <el-table-column label="账号" prop="username"/>
+          <el-table-column label="头像">
+            <template #default="scope">
+              <img v-if="scope.row.avatar" :src="scope.row.avatar" alt=""
+                   style="display: block; width: 40px; height: 40px; border-radius: 50%"/>
+            </template>
+          </el-table-column>
           <el-table-column label="姓名" prop="name"/>
           <el-table-column label="性别" prop="sex"/>
           <el-table-column label="学号" prop="no"/>
@@ -40,7 +46,12 @@
       <el-form ref="formRef" :rules="data.rules" :model="data.form" label-width="auto"
                style="padding-right: 20px; padding-top: 20px">
         <el-form-item label="账号：" label-position="right" prop="username">
-          <el-input v-model="data.form.username" autocomplete="off" placeholder="请输入账号"/>
+          <el-input :disabled="data.form.id" v-model="data.form.username" autocomplete="off" placeholder="请输入账号"/>
+        </el-form-item>
+        <el-form-item label="头像" label-position="right" prop="avatar">
+          <el-upload action="http://localhost:9090/files/upload" list-type="picture" :on-success="handleAvatarSuccess">
+            <el-button>上传头像</el-button>
+          </el-upload>
         </el-form-item>
         <el-form-item label="姓名：" label-position="right" prop="name">
           <el-input v-model="data.form.name" autocomplete="off" placeholder="请输入姓名"/>
@@ -55,7 +66,8 @@
           <el-input v-model="data.form.no" autocomplete="off" placeholder="请输入学号"/>
         </el-form-item>
         <el-form-item label="年龄：" label-position="right">
-          <el-input-number :min="18" style="width: 180px" v-model="data.form.age" autocomplete="off" placeholder="请输入年龄"/>
+          <el-input-number :min="18" style="width: 180px" v-model="data.form.age" autocomplete="off"
+                           placeholder="请输入年龄"/>
         </el-form-item>
         <el-form-item label="个人介绍：" label-position="right">
           <el-input :rows="3" type="textarea" v-model="data.form.description" autocomplete="off"
@@ -74,7 +86,7 @@
 
 <script setup>
 import {reactive, ref} from "vue";
-import {Delete, Edit, Search} from "@element-plus/icons-vue"
+import {Delete, Edit, Plus, Search} from "@element-plus/icons-vue"
 import request from "@/utils/request.js";
 import {ElMessage, ElMessageBox} from "element-plus";
 
@@ -100,6 +112,10 @@ const data = reactive({
 })
 
 const formRef = ref()
+
+const handleAvatarSuccess = (res) => {
+  data.form.avatar = res.data
+}
 
 const load = () => {
   request.get('/employee/selectPage', {

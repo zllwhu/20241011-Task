@@ -3,6 +3,15 @@
     <el-card shadow="never" style="margin-bottom: 10px; width: 50%">
       <el-form ref="formRef" :rules="data.rules" :model="data.form" label-width="auto"
                style="padding-right: 20px; padding-top: 20px">
+        <div style="width: 100%; display: flex; justify-content: center; margin-bottom: 20px">
+          <el-upload class="avatar-uploader" action="http://localhost:9090/files/upload" :show-file-list="false"
+                     :on-success="handleAvatarSuccess">
+            <img v-if="data.form.avatar" :src="data.form.avatar" class="avatar"/>
+            <el-icon v-else class="avatar-uploader-icon">
+              <Plus/>
+            </el-icon>
+          </el-upload>
+        </div>
         <el-form-item label="账号：" label-position="right" prop="username">
           <el-input disabled v-model="data.form.username" autocomplete="off" placeholder="请输入账号"/>
         </el-form-item>
@@ -40,6 +49,7 @@
 import {reactive, ref} from "vue";
 import request from "@/utils/request.js";
 import {ElMessage} from "element-plus";
+import {Plus} from "@element-plus/icons-vue";
 
 const formRef = ref()
 
@@ -58,6 +68,10 @@ const data = reactive({
     ]
   }
 })
+
+const handleAvatarSuccess = (res) => {
+  data.form.avatar = res.data
+}
 
 const emit = defineEmits(['updateUser'])
 
@@ -93,3 +107,31 @@ const updateUser = () => {
   }
 }
 </script>
+
+<style>
+.avatar-uploader .el-upload {
+  border: 1px dashed var(--el-border-color);
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  overflow: hidden;
+  transition: var(--el-transition-duration-fast);
+}
+
+.avatar-uploader .el-upload:hover {
+  border-color: var(--el-color-primary);
+}
+
+.el-icon.avatar-uploader-icon {
+  font-size: 28px;
+  color: #8c939d;
+  width: 120px;
+  height: 120px;
+  text-align: center;
+}
+
+.avatar {
+  width: 120px;
+  height: 120px;
+}
+</style>
