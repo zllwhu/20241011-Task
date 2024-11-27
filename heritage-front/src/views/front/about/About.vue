@@ -2,7 +2,7 @@
   <div>
     <div style="display: flex; padding-top: 30px">
       <el-card style="width: 180px; min-height: calc(100vh - 160px)">
-        <el-menu router :default-active="activePath" style="border: 0">
+        <el-menu router :default-active="activePath" style="border: 0" active-text-color="#f56c6c">
           <el-menu-item index="/front/about/introduction">
             <el-icon>
               <Document/>
@@ -41,3 +41,15 @@ const data = reactive({})
 const route = useRoute();
 const activePath = computed(() => route.path);
 </script>
+
+<style>
+.el-menu-item:hover {
+  background: floralwhite !important;
+  color: #f56c6c !important;
+}
+
+.el-menu-item.is-active {
+  background: floralwhite !important;
+  color: #f56c6c !important;
+}
+</style>

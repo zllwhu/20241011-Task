@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="height: 50px; background-color: #409eff; display: flex; align-items: center">
+    <div style="height: 50px; background-color: #f56c6c; display: flex; align-items: center">
       <div style="width: fit-content; display: flex; align-items: center; padding-left: 100px">
         <img style="width: 35px" src="../../assets/img/logo.png" alt=""/>
         <span style="margin-left: 10px; font-size: 20px; color: white; font-weight: bold">湖北省校园文化遗产数字信息管理平台</span>
@@ -14,10 +14,10 @@
     </div>
 
     <div style="height: 50px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1)">
-      <el-menu router :default-active="activePath" mode="horizontal">
+      <el-menu router :default-active="activePath" mode="horizontal" active-text-color="#f56c6c">
         <el-menu-item index="/front/home">平台主页</el-menu-item>
         <el-menu-item index="/front/about/introduction">关于平台</el-menu-item>
-        <el-menu-item index="3">遗产名录</el-menu-item>
+        <el-menu-item index="/front/heritage/">遗产名录</el-menu-item>
         <el-menu-item index="4">红色图谱</el-menu-item>
         <el-menu-item index="5">遗产档案</el-menu-item>
         <el-menu-item index="6">数字展示</el-menu-item>
@@ -60,5 +60,15 @@ const activePath = computed(() => {
 
 .el-menu-item {
   font-size: 16px;
+}
+
+.el-menu-item:hover {
+  background: floralwhite !important;
+  color: #f56c6c !important;
+}
+
+.el-menu-item.is-active {
+  background: floralwhite !important;
+  color: #f56c6c !important;
 }
 </style>
