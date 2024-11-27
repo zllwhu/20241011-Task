@@ -1,0 +1,64 @@
+<template>
+  <div>
+    <div style="height: 50px; background-color: #409eff; display: flex; align-items: center">
+      <div style="width: fit-content; display: flex; align-items: center; padding-left: 100px">
+        <img style="width: 35px" src="../../assets/img/logo.png" alt=""/>
+        <span style="margin-left: 10px; font-size: 20px; color: white; font-weight: bold">湖北省校园文化遗产数字信息管理平台</span>
+      </div>
+      <div style="flex: 1"/>
+      <div style="width: fit-content; display: flex; align-items: center; padding-right: 100px;">
+        <img :src="data.user.avatar || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'" alt=""
+             style="width: 40px; height: 40px; border-radius: 50%"/>
+        <span style="color: white; margin-left: 10px; font-size: 16px">{{ data.user.name }}</span>
+      </div>
+    </div>
+
+    <div style="height: 50px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.1)">
+      <el-menu router :default-active="activePath" mode="horizontal">
+        <el-menu-item index="/front/home">平台主页</el-menu-item>
+        <el-menu-item index="/front/about/introduction">关于平台</el-menu-item>
+        <el-menu-item index="3">遗产名录</el-menu-item>
+        <el-menu-item index="4">红色图谱</el-menu-item>
+        <el-menu-item index="5">遗产档案</el-menu-item>
+        <el-menu-item index="6">数字展示</el-menu-item>
+        <el-menu-item index="7">智慧管理</el-menu-item>
+        <el-menu-item index="8">专家观点</el-menu-item>
+        <el-menu-item index="9">文旅信息</el-menu-item>
+        <el-menu-item index="10">交互反馈</el-menu-item>
+      </el-menu>
+    </div>
+    <div style="padding-left: 100px; padding-right: 100px">
+      <RouterView/>
+    </div>
+  </div>
+</template>
+
+<script setup>
+import {computed, reactive} from "vue";
+import {useRoute} from "vue-router";
+
+const data = reactive({
+  user: JSON.parse(localStorage.getItem("heritage-user"))
+})
+
+const route = useRoute();
+const activePath = computed(() => {
+  const path = route.path;
+  if (route.path.startsWith("/front/about")) {
+    return "/front/about/introduction";
+  }
+  return path;
+});
+</script>
+
+<style scoped>
+.el-menu {
+  height: 50px;
+  display: flex;
+  justify-content: center;
+}
+
+.el-menu-item {
+  font-size: 16px;
+}
+</style>
