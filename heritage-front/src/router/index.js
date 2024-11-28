@@ -84,6 +84,12 @@ const router = createRouter({
                         },
                     ]
                 },
+                {
+                    path: 'heritage',
+                    name: 'front-heritage',
+                    meta: {title: '遗产名录', needLogin: true},
+                    component: () => import('../views/front/heritage/Heritage.vue')
+                },
             ]
         },
         {path: '/login', name: 'login', meta: {title: '登录系统'}, component: () => import('../views/utils/Login.vue')},
