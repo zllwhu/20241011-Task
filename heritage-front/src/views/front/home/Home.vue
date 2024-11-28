@@ -14,7 +14,7 @@ onMounted(() => {
   const chartDom = document.getElementById("main");
   const myChart = echarts.init(chartDom);
   let option;
-  const svgPath = new URL('@/assets/img/Hubei.svg', import.meta.url).href;
+  const svgPath = new URL('@/assets/img/Map_of_Hubei.svg', import.meta.url).href;
   fetch(svgPath)
       .then((response) => response.text())
       .then((svg) => {

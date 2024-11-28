@@ -90,6 +90,43 @@ const router = createRouter({
                     meta: {title: '遗产名录', needLogin: true},
                     component: () => import('../views/front/heritage/Heritage.vue')
                 },
+                {
+                    path: 'redmap',
+                    name: 'front-redmap',
+                    meta: {title: '红色图谱', needLogin: true},
+                    component: () => import('../views/front/redmap/Redmap.vue'), children: [
+                        {
+                            path: 'spirit-1',
+                            name: 'front-redmap-spirit-1',
+                            meta: {title: '建党精神基因', needLogin: true},
+                            component: () => import('../views/front/redmap/Redmap1.vue'),
+                        },
+                        {
+                            path: 'spirit-2',
+                            name: 'front-redmap-spirit-2',
+                            meta: {title: '抗战精神基因', needLogin: true},
+                            component: () => import('../views/front/redmap/Redmap2.vue'),
+                        },
+                        {
+                            path: 'spirit-3',
+                            name: 'front-redmap-spirit-3',
+                            meta: {title: '科学家精神基因', needLogin: true},
+                            component: () => import('../views/front/redmap/Redmap3.vue'),
+                        },
+                        {
+                            path: 'spirit-4',
+                            name: 'front-redmap-spirit-4',
+                            meta: {title: '三牛精神基因', needLogin: true},
+                            component: () => import('../views/front/redmap/Redmap4.vue'),
+                        },
+                    ]
+                },
+                {
+                    path: 'archive',
+                    name: 'front-archive',
+                    meta: {title: '遗产档案', needLogin: true},
+                    component: () => import('../views/front/archive/Archive.vue'),
+                },
             ]
         },
         {path: '/login', name: 'login', meta: {title: '登录系统'}, component: () => import('../views/utils/Login.vue')},
