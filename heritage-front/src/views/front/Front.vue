@@ -20,7 +20,7 @@
         <el-menu-item index="/front/heritage">遗产名录</el-menu-item>
         <el-menu-item index="/front/redmap/spirit-1">红色图谱</el-menu-item>
         <el-menu-item index="/front/archive">遗产档案</el-menu-item>
-        <el-menu-item index="6">数字展示</el-menu-item>
+        <el-menu-item index="/front/digital/album">数字展示</el-menu-item>
         <el-menu-item index="7">智慧管理</el-menu-item>
         <el-menu-item index="8">专家观点</el-menu-item>
         <el-menu-item index="9">文旅信息</el-menu-item>
@@ -49,6 +49,9 @@ const activePath = computed(() => {
   }
   if (route.path.startsWith("/front/redmap")) {
     return "/front/redmap/spirit-1";
+  }
+  if (route.path.startsWith("/front/digital")) {
+    return "/front/digital/album";
   }
   return path;
 });

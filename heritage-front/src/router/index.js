@@ -127,10 +127,52 @@ const router = createRouter({
                     meta: {title: '遗产档案', needLogin: true},
                     component: () => import('../views/front/archive/Archive.vue'),
                 },
+                {
+                    path: 'digital',
+                    name: 'front-digital',
+                    meta: {title: '数字展示', needLogin: true},
+                    component: () => import('../views/front/digital/Digital.vue'), children: [
+                        {
+                            path: 'album',
+                            name: 'front-digital-album',
+                            meta: {title: '遗产图库', needLogin: true},
+                            component: () => import('../views/front/digital/Digital1.vue'),
+                        },
+                        {
+                            path: 'photo',
+                            name: 'front-digital-photo',
+                            meta: {title: '影像资料', needLogin: true},
+                            component: () => import('../views/front/digital/Digital2.vue'),
+                        },
+                        {
+                            path: 'story',
+                            name: 'front-digital-story',
+                            meta: {title: '红色故事', needLogin: true},
+                            component: () => import('../views/front/digital/Digital3.vue'),
+                        },
+                        {
+                            path: '3d',
+                            name: 'front-digital-3d',
+                            meta: {title: '三维模型', needLogin: true},
+                            component: () => import('../views/front/digital/Digital4.vue'),
+                        },
+                        {
+                            path: 'tourist',
+                            name: 'front-digital-tourist',
+                            meta: {title: '数字漫游', needLogin: true},
+                            component: () => import('../views/front/digital/Digital5.vue'),
+                        },
+                    ]
+                },
             ]
         },
         {path: '/login', name: 'login', meta: {title: '登录系统'}, component: () => import('../views/utils/Login.vue')},
-        {path: '/register', name: 'register', meta: {title: '注册系统'}, component: () => import('../views/manager/Register.vue')},
+        {
+            path: '/register',
+            name: 'register',
+            meta: {title: '注册系统'},
+            component: () => import('../views/manager/Register.vue')
+        },
         {path: '/404', name: '404', meta: {title: '404找不到页面'}, component: () => import('../views/utils/404.vue')},
         {path: '/:pathMatch(.*)', redirect: '/404'},
     ]
