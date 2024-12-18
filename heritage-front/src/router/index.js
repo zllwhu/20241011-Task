@@ -277,7 +277,7 @@ const router = createRouter({
             path: '/register',
             name: 'register',
             meta: {title: '注册系统'},
-            component: () => import('../views/manager/Register.vue')
+            component: () => import('../views/utils/Register.vue')
         },
         {path: '/404', name: '404', meta: {title: '404找不到页面'}, component: () => import('../views/utils/404.vue')},
         {path: '/:pathMatch(.*)', redirect: '/404'},

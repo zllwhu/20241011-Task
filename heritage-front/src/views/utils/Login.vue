@@ -23,7 +23,7 @@
             <el-button @click="login" type="primary" style="width: 100%" size="large">登 录</el-button>
           </div>
           <div style="text-align: right">还没有账号？请 <a style="color: #409eff; text-decoration: none"
-                                                          href="/manager/Register">注册</a></div>
+                                                          href="/register">注册</a></div>
         </el-form>
       </div>
     </div>
@@ -54,7 +54,8 @@ const login = () => {
   formRef.value.validate(valid => {
     if (valid) {
       request.post('/login', data.form).then(res => {
-        if (res.code === '200') {
+        console.log(res)
+        if (res.code === 200) {
           localStorage.setItem('heritage-user', JSON.stringify(res.data))
           localStorage.setItem('token', res.data.username)
           ElMessage.success('登录成功')

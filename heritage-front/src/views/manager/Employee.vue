@@ -49,7 +49,7 @@
           <el-input :disabled="data.form.id" v-model="data.form.username" autocomplete="off" placeholder="请输入账号"/>
         </el-form-item>
         <el-form-item label="头像" label-position="right" prop="avatar">
-          <el-upload action="http://localhost:9090/files/upload" list-type="picture" :on-success="handleAvatarSuccess">
+          <el-upload :action="handleUpload" list-type="picture" :on-success="handleAvatarSuccess">
             <el-button>上传头像</el-button>
           </el-upload>
         </el-form-item>
@@ -115,6 +115,11 @@ const formRef = ref()
 
 const handleAvatarSuccess = (res) => {
   data.form.avatar = res.data
+}
+
+const handleUpload = () => {
+  console.log(request.baseURL)
+  return request.baseURL + "/files/upload"
 }
 
 const load = () => {

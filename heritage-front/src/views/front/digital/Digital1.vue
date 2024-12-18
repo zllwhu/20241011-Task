@@ -1,7 +1,7 @@
 <template>
   <div>
     <el-card>
-      
+      内容待定
     </el-card>
   </div>
 </template>
