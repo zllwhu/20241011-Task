@@ -164,6 +164,112 @@ const router = createRouter({
                         },
                     ]
                 },
+                {
+                    path: 'smartmanage',
+                    name: 'front-smartmanage',
+                    meta: {title: '智慧管理', needLogin: true},
+                    component: () => import('../views/front/smartmanage/SmartManage.vue'), children: [
+                        {
+                            path: 'health',
+                            name: 'front-smartmanage-health',
+                            meta: {title: '健康检测', needLogin: true},
+                            component: () => import('../views/front/smartmanage/SmartManage1.vue'),
+                        },
+                        {
+                            path: 'monitoring',
+                            name: 'front-smartmanage-monitoring',
+                            meta: {title: '监测巡查', needLogin: true},
+                            component: () => import('../views/front/smartmanage/SmartManage2.vue'),
+                        },
+                        {
+                            path: 'twin',
+                            name: 'front-smartmanage-twin',
+                            meta: {title: '数字孪生', needLogin: true},
+                            component: () => import('../views/front/smartmanage/SmartManage3.vue'),
+                        },
+                    ]
+                },
+                {
+                    path: 'expert',
+                    name: 'front-expert',
+                    meta: {title: '专家观点', needLogin: true},
+                    component: () => import('../views/front/expert/Expert.vue'), children: [
+                        {
+                            path: 'experts',
+                            name: 'front-expert-experts',
+                            meta: {title: '专家库', needLogin: true},
+                            component: () => import('../views/front/expert/Expert1.vue'),
+                        },
+                        {
+                            path: 'books',
+                            name: 'front-expert-books',
+                            meta: {title: '佳作推荐', needLogin: true},
+                            component: () => import('../views/front/expert/Expert2.vue'),
+                        },
+                        {
+                            path: 'opinions',
+                            name: 'front-expert-opinions',
+                            meta: {title: '观点资讯', needLogin: true},
+                            component: () => import('../views/front/expert/Expert3.vue'),
+                        },
+                        {
+                            path: 'videos',
+                            name: 'front-expert-videos',
+                            meta: {title: '专家讲坛', needLogin: true},
+                            component: () => import('../views/front/expert/Expert4.vue'),
+                        },
+                    ]
+                },
+                {
+                    path: 'tourism',
+                    name: 'front-tourism',
+                    meta: {title: '文旅信息', needLogin: true},
+                    component: () => import('../views/front/tourism/Tourism.vue'), children: [
+                        {
+                            path: 'policy',
+                            name: 'front-tourism-policy',
+                            meta: {title: '政策解读', needLogin: true},
+                            component: () => import('../views/front/tourism/Tourism1.vue'),
+                        },
+                        {
+                            path: 'information',
+                            name: 'front-tourism-information',
+                            meta: {title: '文旅信息', needLogin: true},
+                            component: () => import('../views/front/tourism/Tourism2.vue'),
+                        },
+                        {
+                            path: 'shop',
+                            name: 'front-tourism-shop',
+                            meta: {title: '文创展示', needLogin: true},
+                            component: () => import('../views/front/tourism/Tourism3.vue'),
+                        },
+                        {
+                            path: 'activities',
+                            name: 'front-tourism-activities',
+                            meta: {title: '活动推介', needLogin: true},
+                            component: () => import('../views/front/tourism/Tourism4.vue'),
+                        },
+                    ]
+                },
+                {
+                    path: 'feedback',
+                    name: 'front-feedback',
+                    meta: {title: '交互反馈', needLogin: true},
+                    component: () => import('../views/front/feedback/Feedback.vue'), children: [
+                        {
+                            path: 'message',
+                            name: 'front-feedback-message',
+                            meta: {title: '留言板', needLogin: true},
+                            component: () => import('../views/front/feedback/Feedback1.vue'),
+                        },
+                        {
+                            path: 'share',
+                            name: 'front-feedback-share',
+                            meta: {title: '文旅信息', needLogin: true},
+                            component: () => import('../views/front/feedback/Feedback2.vue'),
+                        },
+                    ]
+                },
             ]
         },
         {path: '/login', name: 'login', meta: {title: '登录系统'}, component: () => import('../views/utils/Login.vue')},

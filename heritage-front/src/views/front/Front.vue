@@ -21,10 +21,10 @@
         <el-menu-item index="/front/redmap/spirit-1">红色图谱</el-menu-item>
         <el-menu-item index="/front/archive">遗产档案</el-menu-item>
         <el-menu-item index="/front/digital/album">数字展示</el-menu-item>
-        <el-menu-item index="7">智慧管理</el-menu-item>
-        <el-menu-item index="8">专家观点</el-menu-item>
-        <el-menu-item index="9">文旅信息</el-menu-item>
-        <el-menu-item index="10">交互反馈</el-menu-item>
+        <el-menu-item index="/front/smartmanage/health">智慧管理</el-menu-item>
+        <el-menu-item index="/front/expert/experts">专家观点</el-menu-item>
+        <el-menu-item index="/front/tourism/policy">文旅信息</el-menu-item>
+        <el-menu-item index="/front/feedback/message">交互反馈</el-menu-item>
       </el-menu>
     </div>
     <div style="padding-left: 100px; padding-right: 100px">
@@ -52,6 +52,18 @@ const activePath = computed(() => {
   }
   if (route.path.startsWith("/front/digital")) {
     return "/front/digital/album";
+  }
+  if (route.path.startsWith("/front/smartmanage")) {
+    return "/front/smartmanage/health";
+  }
+  if (route.path.startsWith("/front/expert")) {
+    return "/front/expert/experts";
+  }
+  if (route.path.startsWith("/front/tourism")) {
+    return "/front/tourism/policy";
+  }
+  if (route.path.startsWith("/front/feedback")) {
+    return "/front/feedback/message";
   }
   return path;
 });
