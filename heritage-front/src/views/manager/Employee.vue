@@ -13,7 +13,7 @@
           <el-table-column label="账号" prop="username"/>
           <el-table-column label="头像">
             <template #default="scope">
-              <img v-if="scope.row.avatar" :src="scope.row.avatar" alt=""
+              <img v-if="scope.row.avatar" :src="getAvatar(scope.row.avatar)" alt=""
                    style="display: block; width: 40px; height: 40px; border-radius: 50%"/>
             </template>
           </el-table-column>
@@ -49,7 +49,7 @@
           <el-input :disabled="data.form.id" v-model="data.form.username" autocomplete="off" placeholder="请输入账号"/>
         </el-form-item>
         <el-form-item label="头像" label-position="right" prop="avatar">
-          <el-upload :action="handleUpload" list-type="picture" :on-success="handleAvatarSuccess">
+          <el-upload :action="uploadUrl" list-type="picture" :on-success="handleAvatarSuccess">
             <el-button>上传头像</el-button>
           </el-upload>
         </el-form-item>
@@ -113,14 +113,16 @@ const data = reactive({
 
 const formRef = ref()
 
-const handleAvatarSuccess = (res) => {
-  data.form.avatar = res.data
+const getAvatar = (avatar) => {
+  const downloadUrl = request.defaults.baseURL + "/files/download/" + avatar;
+  return downloadUrl;
 }
 
-const handleUpload = () => {
-  console.log(request.baseURL)
-  return request.baseURL + "/files/upload"
+const handleAvatarSuccess = (res) => {
+  data.form.avatar = res.msg
 }
+
+const uploadUrl = ref(request.defaults.baseURL + "/files/upload");
 
 const load = () => {
   request.get('/employee/selectPage', {
@@ -130,7 +132,6 @@ const load = () => {
       name: data.name
     }
   }).then(res => {
-    console.log(res)
     data.tableData = res.data.list
     data.total = res.data.total
   })

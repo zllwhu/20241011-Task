@@ -49,6 +49,18 @@ const router = createRouter({
                     meta: {title: '修改密码页面', needLogin: true},
                     component: () => import('../views/manager/Password.vue')
                 },
+                {
+                    path: 'others',
+                    name: 'others',
+                    meta: {title: '其他建筑管理页面', needLogin: true},
+                    component: () => import('../views/manager/Others.vue')
+                },
+                {
+                    path: 'whu',
+                    name: 'whu',
+                    meta: {title: '武大建筑管理页面', needLogin: true},
+                    component: () => import('../views/manager/Whu.vue')
+                },
             ]
         },
         {

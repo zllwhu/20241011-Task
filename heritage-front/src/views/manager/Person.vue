@@ -4,9 +4,9 @@
       <el-form ref="formRef" :rules="data.rules" :model="data.form" label-width="auto"
                style="padding-right: 20px; padding-top: 20px">
         <div style="width: 100%; display: flex; justify-content: center; margin-bottom: 20px">
-          <el-upload class="avatar-uploader" action="http://localhost:9090/files/upload" :show-file-list="false"
+          <el-upload class="avatar-uploader" :action="uploadUrl" :show-file-list="false"
                      :on-success="handleAvatarSuccess">
-            <img v-if="data.form.avatar" :src="data.form.avatar" class="avatar"/>
+            <img v-if="data.form.avatar" :src="getAvatar(data.form.avatar)" class="avatar" alt=""/>
             <el-icon v-else class="avatar-uploader-icon">
               <Plus/>
             </el-icon>
@@ -69,8 +69,15 @@ const data = reactive({
   }
 })
 
+const getAvatar = (avatar) => {
+  const downloadUrl = request.defaults.baseURL + "/files/download/" + avatar;
+  return downloadUrl;
+}
+
+const uploadUrl = ref(request.defaults.baseURL + "/files/upload");
+
 const handleAvatarSuccess = (res) => {
-  data.form.avatar = res.data
+  data.form.avatar = res.msg
 }
 
 const emit = defineEmits(['updateUser'])
