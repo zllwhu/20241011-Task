@@ -61,7 +61,7 @@ const login = () => {
           ElMessage.success('登录成功')
           if (data.form.role === 'ADMIN') {
             setTimeout(() => {
-              location.href = '/manager/home'
+              location.href = '/manager/whu'
             }, 200)
           } else {
             setTimeout(() => {

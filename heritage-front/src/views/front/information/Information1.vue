@@ -1,6 +1,6 @@
 <template>
   <div>
-    <el-card shadow="never" style="margin-bottom: 10px; width: 50%">
+    <el-card>
       <el-form ref="formRef" :rules="data.rules" :model="data.form" label-width="auto"
                style="padding-right: 20px; padding-top: 20px">
         <div style="width: 100%; display: flex; justify-content: center; margin-bottom: 20px">
@@ -38,7 +38,7 @@
           </el-form-item>
         </div>
         <div style="text-align: center">
-          <el-button @click="updateUser" type="primary">更新个人信息</el-button>
+          <el-button style="background-color: #f56c6c; border-color: #f56c6c" @click="updateUser" type="primary">更新个人信息</el-button>
         </div>
       </el-form>
     </el-card>
@@ -70,8 +70,7 @@ const data = reactive({
 })
 
 const getAvatar = (avatar) => {
-  const downloadUrl = request.defaults.baseURL + "/files/download/" + avatar;
-  return downloadUrl;
+  return request.defaults.baseURL + "/files/download/" + avatar;
 }
 
 const uploadUrl = ref(request.defaults.baseURL + "/files/upload");
@@ -97,6 +96,7 @@ const updateUser = () => {
         ElMessage.success('更新成功')
         localStorage.setItem("heritage-user", JSON.stringify(data.form))
         emit('updateUser')
+        window.dispatchEvent(new Event("info-updated"));
       } else {
         ElMessage.error(res.msg)
       }
@@ -107,6 +107,7 @@ const updateUser = () => {
         ElMessage.success('更新成功')
         localStorage.setItem("heritage-user", JSON.stringify(data.form))
         emit('updateUser')
+        window.dispatchEvent(new Event("info-updated"));
       } else {
         ElMessage.error(res.msg)
       }
@@ -126,7 +127,7 @@ const updateUser = () => {
 }
 
 .avatar-uploader .el-upload:hover {
-  border-color: var(--el-color-primary);
+  border-color: #f56c6c;
 }
 
 .el-icon.avatar-uploader-icon {

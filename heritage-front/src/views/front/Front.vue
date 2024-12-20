@@ -7,7 +7,7 @@
       </div>
       <div style="flex: 1"/>
       <div style="width: fit-content; display: flex; align-items: center; padding-right: 100px;">
-        <img :src="data.user.avatar || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'" alt=""
+        <img :src="getAvatar(data.user.avatar) || 'https://cube.elemecdn.com/3/7c/3ea6beec64369c2642b92c6726f1epng.png'" alt=""
              style="width: 40px; height: 40px; border-radius: 50%"/>
         <span style="color: white; margin-left: 10px; font-size: 16px">{{ data.user.name }}</span>
       </div>
@@ -25,17 +25,19 @@
         <el-menu-item index="/front/expert/experts">专家观点</el-menu-item>
         <el-menu-item index="/front/tourism/policy">文旅信息</el-menu-item>
         <el-menu-item index="/front/feedback/message">交互反馈</el-menu-item>
+        <el-menu-item index="/front/information/user">个人信息</el-menu-item>
       </el-menu>
     </div>
     <div style="padding-left: 100px; padding-right: 100px">
-      <RouterView/>
+      <RouterView @updateUser="updateUser"/>
     </div>
   </div>
 </template>
 
 <script setup>
-import {computed, reactive} from "vue";
+import {computed, onBeforeUnmount, onMounted, reactive} from "vue";
 import {useRoute} from "vue-router";
+import request from "@/utils/request.js";
 
 const data = reactive({
   user: JSON.parse(localStorage.getItem("heritage-user"))
@@ -65,7 +67,26 @@ const activePath = computed(() => {
   if (route.path.startsWith("/front/feedback")) {
     return "/front/feedback/message";
   }
+  if (route.path.startsWith("/front/information")) {
+    return "/front/information/user";
+  }
   return path;
+});
+
+const getAvatar = (avatar) => {
+  return request.defaults.baseURL + "/files/download/" + avatar;
+}
+
+const updateUser = () => {
+  data.user = JSON.parse(localStorage.getItem("heritage-user"))
+}
+
+onMounted(() => {
+  window.addEventListener("info-updated", updateUser);
+});
+
+onBeforeUnmount(() => {
+  window.removeEventListener("info-updated", updateUser);
 });
 </script>
 

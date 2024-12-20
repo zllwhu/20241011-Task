@@ -277,8 +277,27 @@ const router = createRouter({
                         {
                             path: 'share',
                             name: 'front-feedback-share',
-                            meta: {title: '文旅信息', needLogin: true},
+                            meta: {title: '资料分享', needLogin: true},
                             component: () => import('../views/front/feedback/Feedback2.vue'),
+                        },
+                    ]
+                },
+                {
+                    path: 'information',
+                    name: 'front-information',
+                    meta: {title: '个人信息', needLogin: true},
+                    component: () => import('../views/front/information/Information.vue'), children: [
+                        {
+                            path: 'user',
+                            name: 'front-information-user',
+                            meta: {title: '个人信息', needLogin: true},
+                            component: () => import('../views/front/information/Information1.vue'),
+                        },
+                        {
+                            path: 'password',
+                            name: 'front-information-password',
+                            meta: {title: '修改密码', needLogin: true},
+                            component: () => import('../views/front/information/Information2.vue'),
                         },
                     ]
                 },

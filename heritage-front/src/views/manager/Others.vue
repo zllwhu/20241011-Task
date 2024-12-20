@@ -57,16 +57,16 @@
         </div>
       </el-card>
     </div>
-    <el-dialog v-model="data.formVisible" title="建筑信息" width="1000" destroy-on-close>
+    <el-dialog v-model="data.formVisible" title="建筑信息" width="1000px" destroy-on-close>
       <el-form ref="formRef" :rules="data.rules" :model="data.form" label-width="auto"
                style="padding-right: 20px; padding-top: 20px">
         <el-row :gutter="20">
           <el-col :span="12">
             <el-form-item label="名称：" label-position="right" prop="archiName">
-              <el-input v-model="data.form.archiName" autocomplete="off" placeholder="请输入名称"/>
+              <el-input v-model="data.form.archiName" autocomplete="off" placeholder="请输入建筑名称"/>
             </el-form-item>
             <el-form-item label="别名：" label-position="right" prop="archiNickname">
-              <el-input v-model="data.form.archiNickname" autocomplete="off" placeholder="请输入别名"/>
+              <el-input v-model="data.form.archiNickname" autocomplete="off" placeholder="请输入建筑别名"/>
             </el-form-item>
             <el-form-item label="年代：" label-position="right" prop="archiYear">
               <el-input v-model="data.form.archiYear" autocomplete="off" placeholder="请输入年代"/>
@@ -81,10 +81,20 @@
               <el-input v-model="data.form.archiLevel" autocomplete="off" placeholder="请输入保护级别"/>
             </el-form-item>
             <el-form-item label="公布年份：" label-position="right" prop="archiAnnouncementYear">
-              <el-input-number style="width: 200px" v-model="data.form.archiAnnouncementYear" autocomplete="off" placeholder="请输入公布年份"/>
+              <el-input-number style="width: 200px" v-model="data.form.archiAnnouncementYear" autocomplete="off"
+                               placeholder="请输入公布年份"/>
             </el-form-item>
             <el-form-item label="公布批次：" label-position="right" prop="archiAnnouncementBatch">
-              <el-input-number style="width: 200px" v-model="data.form.archiAnnouncementBatch" autocomplete="off" placeholder="请输入公布批次"/>
+              <el-input-number style="width: 200px" v-model="data.form.archiAnnouncementBatch" autocomplete="off"
+                               placeholder="请输入公布批次"/>
+            </el-form-item>
+            <el-form-item label="建筑简介：" label-position="right" prop="archiDetail">
+              <el-input v-model="data.form.archiDetail" autocomplete="off" placeholder="请输入建筑简介"/>
+            </el-form-item>
+            <el-form-item label="封面图案：" label-position="right" prop="archiCover">
+              <el-upload :action="uploadUrl" list-type="text" :on-success="handleAvatarSuccess">
+                <el-button>上传封面图案</el-button>
+              </el-upload>
             </el-form-item>
           </el-col>
 
@@ -111,35 +121,25 @@
               <el-input v-model="data.form.archiLatitude" autocomplete="off" placeholder="请输入纬度"/>
             </el-form-item>
             <el-form-item label="海拔：" label-position="right" prop="archiHeight">
-              <el-input-number style="width: 200px" v-model="data.form.archiHeight" autocomplete="off" placeholder="请输入海拔"/>
+              <el-input-number style="width: 200px" v-model="data.form.archiHeight" autocomplete="off"
+                               placeholder="请输入海拔"/>
+            </el-form-item>
+            <el-form-item label="红色精神：" label-position="right" prop="archiSpirit">
+              <el-input v-model="data.form.archiSpirit" autocomplete="off" placeholder="请输入红色精神"/>
             </el-form-item>
           </el-col>
         </el-row>
 
         <el-row :gutter="20">
-          <el-col :span="12">
-            <el-form-item label="封面图案：" label-position="right" prop="archiCover">
-              <el-upload :action="uploadUrl" list-type="picture" :on-success="handleAvatarSuccess">
-                <el-button>上传封面图案</el-button>
-              </el-upload>
-            </el-form-item>
-            <el-form-item label="建筑简介：" label-position="right" prop="archiDetail">
-              <el-input v-model="data.form.archiDetail" autocomplete="off" placeholder="请输入建筑简介"/>
-            </el-form-item>
-          </el-col>
-
-          <el-col :span="12">
-            <el-form-item label="红色精神：" label-position="right" prop="archiSpirit">
-              <el-input v-model="data.form.archiSpirit" autocomplete="off" placeholder="请输入红色精神"/>
-            </el-form-item>
+          <el-col>
             <el-form-item label="红色故事简介：" label-position="right" prop="archiStoryabstract">
-              <el-input v-model="data.form.archiStoryabstract" autocomplete="off" placeholder="请输入红色故事简介"/>
+              <el-input :rows="1" type="textarea" v-model="data.form.archiStoryabstract" autocomplete="off" placeholder="请输入红色故事简介"/>
             </el-form-item>
             <el-form-item label="红色故事详细：" label-position="right" prop="archiStoryfull">
-              <el-input v-model="data.form.archiStoryfull" autocomplete="off" placeholder="请输入红色故事详细"/>
+              <el-input :rows="1" type="textarea" v-model="data.form.archiStoryfull" autocomplete="off" placeholder="请输入红色故事详细"/>
             </el-form-item>
             <el-form-item label="红色故事文章：" label-position="right" prop="archiStorypath">
-              <el-input v-model="data.form.archiStorypath" autocomplete="off" placeholder="请输入红色故事文章"/>
+              <el-input :rows="1" type="textarea" v-model="data.form.archiStorypath" autocomplete="off" placeholder="请输入红色故事文章"/>
             </el-form-item>
           </el-col>
         </el-row>
@@ -186,7 +186,7 @@ const handleAvatarSuccess = (res) => {
   data.form.archiCover = res.msg
 }
 
-const uploadUrl = ref(request.defaults.baseURL + "/system/architecture/cover");
+const uploadUrl = ref(request.defaults.baseURL + "/system/architecture/upload");
 
 const load = () => {
   request.get('/system/architecture/selectPage', {

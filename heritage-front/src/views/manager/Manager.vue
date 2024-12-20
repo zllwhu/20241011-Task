@@ -16,12 +16,6 @@
     <div style="display: flex">
       <div style="width: 200px; border-right: 1px solid #dcdfe6; min-height: calc(100vh - 60px)">
         <el-menu router :default-active="router.currentRoute.value.path" :default-openeds="['1', '2']" style="border: 0">
-          <el-menu-item index="/manager/home">
-            <el-icon>
-              <House/>
-            </el-icon>
-            系统首页
-          </el-menu-item>
 
           <el-sub-menu index="1" v-if="data.user.role === 'ADMIN'">
             <template #title>
