@@ -14,7 +14,7 @@
           <el-table-column label="封面图案" prop="archiCover">
             <template #default="scope">
               <img v-if="scope.row.archiCover" :src="getAvatar(scope.row.archiCover)" alt=""
-                   style="display: block; width: 50px;"/>
+                   style="display: block; width: 50px;" @click="handleImagePreview(scope.row.archiCover)"/>
             </template>
           </el-table-column>
           <el-table-column label="名称" prop="archiName"/>
@@ -57,6 +57,13 @@
         </div>
       </el-card>
     </div>
+
+    <el-dialog v-model="data.dialogVisible" width="800px" @close="data.currentImage = ''">
+      <div class="image-container">
+        <img :src="data.currentImage" alt="预览图" style="max-width: 100%; max-height: 600px;"/>
+      </div>
+    </el-dialog>
+
     <el-dialog v-model="data.formVisible" title="建筑信息" width="1000px" destroy-on-close>
       <el-form ref="formRef" :rules="data.rules" :model="data.form" label-width="auto"
                style="padding-right: 20px; padding-top: 20px">
@@ -133,13 +140,16 @@
         <el-row :gutter="20">
           <el-col>
             <el-form-item label="红色故事简介：" label-position="right" prop="archiStoryabstract">
-              <el-input :rows="1" type="textarea" v-model="data.form.archiStoryabstract" autocomplete="off" placeholder="请输入红色故事简介"/>
+              <el-input :rows="1" type="textarea" v-model="data.form.archiStoryabstract" autocomplete="off"
+                        placeholder="请输入红色故事简介"/>
             </el-form-item>
             <el-form-item label="红色故事详细：" label-position="right" prop="archiStoryfull">
-              <el-input :rows="1" type="textarea" v-model="data.form.archiStoryfull" autocomplete="off" placeholder="请输入红色故事详细"/>
+              <el-input :rows="1" type="textarea" v-model="data.form.archiStoryfull" autocomplete="off"
+                        placeholder="请输入红色故事详细"/>
             </el-form-item>
             <el-form-item label="红色故事文章：" label-position="right" prop="archiStorypath">
-              <el-input :rows="1" type="textarea" v-model="data.form.archiStorypath" autocomplete="off" placeholder="请输入红色故事文章"/>
+              <el-input :rows="1" type="textarea" v-model="data.form.archiStorypath" autocomplete="off"
+                        placeholder="请输入红色故事文章"/>
             </el-form-item>
           </el-col>
         </el-row>
@@ -172,7 +182,9 @@ const data = reactive({
     archiName: [
       {required: true, message: '请输入建筑名称', trigger: 'blur'},
     ],
-  }
+  },
+  dialogVisible: false,
+  currentImage: '',
 })
 
 const formRef = ref()
@@ -267,4 +279,18 @@ const del = (id) => {
     })
   }).catch()
 }
+
+const handleImagePreview = (imageUrl) => {
+  data.currentImage = getAvatar(imageUrl); // 设置当前图片地址
+  data.dialogVisible = true; // 显示图片预览弹窗
+}
 </script>
+
+<style scoped>
+.image-container {
+  display: flex;
+  justify-content: center;  /* 水平居中 */
+  align-items: center;      /* 垂直居中 */
+  height: 100%;             /* 让容器填满父元素 */
+}
+</style>

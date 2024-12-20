@@ -16,37 +16,37 @@
           <el-table-column label="立体图" prop="archiElevation">
             <template #default="scope">
               <img v-if="scope.row.archiElevation" :src="getAvatar(scope.row.archiElevation)" alt=""
-                   style="display: block; width: 50px;"/>
+                   style="display: block; width: 50px;" @click="handleImagePreview(scope.row.archiElevation)"/>
             </template>
           </el-table-column>
           <el-table-column label="平面图" prop="archiPlan">
             <template #default="scope">
               <img v-if="scope.row.archiPlan" :src="getAvatar(scope.row.archiPlan)" alt=""
-                   style="display: block; width: 50px;"/>
+                   style="display: block; width: 50px;" @click="handleImagePreview(scope.row.archiPlan)"/>
             </template>
           </el-table-column>
           <el-table-column label="透视图" prop="archiPerspective">
             <template #default="scope">
               <img v-if="scope.row.archiPerspective" :src="getAvatar(scope.row.archiPerspective)" alt=""
-                   style="display: block; width: 50px;"/>
+                   style="display: block; width: 50px;" @click="handleImagePreview(scope.row.archiPerspective)"/>
             </template>
           </el-table-column>
           <el-table-column label="剖面图" prop="archiSectionview">
             <template #default="scope">
               <img v-if="scope.row.archiSectionview" :src="getAvatar(scope.row.archiSectionview)" alt=""
-                   style="display: block; width: 50px;"/>
+                   style="display: block; width: 50px;" @click="handleImagePreview(scope.row.archiSectionview)"/>
             </template>
           </el-table-column>
           <el-table-column label="总平面图" prop="archiGeneral">
             <template #default="scope">
               <img v-if="scope.row.archiGeneral" :src="getAvatar(scope.row.archiGeneral)" alt=""
-                   style="display: block; width: 50px;"/>
+                   style="display: block; width: 50px;" @click="handleImagePreview(scope.row.archiGeneral)"/>
             </template>
           </el-table-column>
           <el-table-column label="效果图" prop="archiRendering">
             <template #default="scope">
               <img v-if="scope.row.archiRendering" :src="getAvatar(scope.row.archiRendering)" alt=""
-                   style="display: block; width: 50px;"/>
+                   style="display: block; width: 50px;" @click="handleImagePreview(scope.row.archiRendering)"/>
             </template>
           </el-table-column>
           <el-table-column label="操作" min-width="150" fixed="right">
@@ -68,6 +68,13 @@
         </div>
       </el-card>
     </div>
+
+    <el-dialog v-model="data.dialogVisible" width="800px" @close="data.currentImage = ''">
+      <div class="image-container">
+        <img :src="data.currentImage" alt="预览图" style="max-width: 100%; max-height: 600px;"/>
+      </div>
+    </el-dialog>
+
     <el-dialog v-model="data.formVisible" title="建筑信息" width="600px" destroy-on-close>
       <el-form ref="formRef" :rules="data.rules" :model="data.form" label-width="auto"
                style="padding-right: 20px; padding-top: 20px">
@@ -144,7 +151,9 @@ const data = reactive({
     archiName: [
       {required: true, message: '请输入建筑名称', trigger: 'blur'},
     ],
-  }
+  },
+  dialogVisible: false,
+  currentImage: '',
 })
 
 const formRef = ref()
@@ -262,4 +271,18 @@ const del = (id) => {
     })
   }).catch()
 }
+
+const handleImagePreview = (imageUrl) => {
+  data.currentImage = getAvatar(imageUrl); // 设置当前图片地址
+  data.dialogVisible = true; // 显示图片预览弹窗
+}
 </script>
+
+<style scoped>
+.image-container {
+  display: flex;
+  justify-content: center; /* 水平居中 */
+  align-items: center; /* 垂直居中 */
+  height: 100%; /* 让容器填满父元素 */
+}
+</style>

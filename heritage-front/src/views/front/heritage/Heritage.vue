@@ -49,6 +49,12 @@
       </div>
     </el-card>
   </div>
+
+  <el-dialog v-model="data.dialogVisible" width="800px" @close="data.currentImage = ''">
+    <div class="image-container">
+      <img :src="data.currentImage" alt="预览图" style="max-width: 100%; max-height: 600px;"/>
+    </div>
+  </el-dialog>
 </template>
 
 <script setup>
@@ -65,6 +71,8 @@ const data = reactive({
   pageNum: 1,  // 当前页
   pageSize: 5,  // 每页显示的数据条数
   total: 0,  // 总数据条数
+  dialogVisible: false,
+  currentImage: '',
 });
 
 // 监控已选择的城市
@@ -132,6 +140,11 @@ load();
 const getAvatar = (avatar) => {
   return request.defaults.baseURL + "/system/architecture/download/" + avatar;
 }
+
+const handleImagePreview = (imageUrl) => {
+  data.currentImage = getAvatar(imageUrl); // 设置当前图片地址
+  data.dialogVisible = true; // 显示图片预览弹窗
+}
 </script>
 
 <style>
@@ -152,5 +165,12 @@ const getAvatar = (avatar) => {
 .el-checkbox__label {
   font-weight: normal;
   color: #303133;
+}
+
+.image-container {
+  display: flex;
+  justify-content: center;  /* 水平居中 */
+  align-items: center;      /* 垂直居中 */
+  height: 100%;             /* 让容器填满父元素 */
 }
 </style>
