@@ -31,7 +31,7 @@ import {useRoute} from "vue-router";
 import {MapLocation} from "@element-plus/icons-vue";
 
 const data = reactive({
-  cities: ['武汉市', '黄石市', '十堰市', '宜昌市', '襄阳市', '鄂州市', '荆门市', '孝感市', '荆州市', '黄冈市', '咸宁市', '随州市', '恩施州', '直管市林区'],
+  cities: ['武汉市', '黄石市', '十堰市', '宜昌市', '襄阳市', '鄂州市', '荆门市', '孝感市', '荆州市', '黄冈市', '咸宁市', '随州市', '恩施州', '仙桃市', '潜江市', '天门市', '神农架林区'],
 })
 
 const route = useRoute();

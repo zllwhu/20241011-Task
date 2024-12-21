@@ -190,7 +190,25 @@ const router = createRouter({
                             name: 'front-heritage-15',
                             meta: { title: '遗产名录', needLogin: true },
                             component: () => import('../views/front/heritage/Heritage15.vue'),
-                        }
+                        },
+                        {
+                            path: '16',
+                            name: 'front-heritage-16',
+                            meta: { title: '遗产名录', needLogin: true },
+                            component: () => import('../views/front/heritage/Heritage16.vue'),
+                        },
+                        {
+                            path: '17',
+                            name: 'front-heritage-17',
+                            meta: { title: '遗产名录', needLogin: true },
+                            component: () => import('../views/front/heritage/Heritage17.vue'),
+                        },
+                        {
+                            path: '18',
+                            name: 'front-heritage-18',
+                            meta: { title: '遗产名录', needLogin: true },
+                            component: () => import('../views/front/heritage/Heritage18.vue'),
+                        },
                     ]
                 },
                 {

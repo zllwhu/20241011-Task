@@ -47,7 +47,7 @@ import {reactive, watch} from "vue";
 import request from "@/utils/request.js";
 
 const data = reactive({
-  cities: ['武汉市', '黄石市', '十堰市', '宜昌市', '襄阳市', '鄂州市', '荆门市', '孝感市', '荆州市', '黄冈市', '咸宁市', '随州市', '恩施州', '直管市林区'],
+  cities: ['武汉市', '黄石市', '十堰市', '宜昌市', '襄阳市', '鄂州市', '荆门市', '孝感市', '荆州市', '黄冈市', '咸宁市', '随州市', '恩施州', '仙桃市', '潜江市', '天门市', '神农架林区'],
   tableData: [],
   allData: [],  // 存储后端返回的所有数据
   pageNum: 1,  // 当前页
@@ -61,7 +61,7 @@ const data = reactive({
 const load = () => {
   request.get('/system/architecture/list', {
     params: {
-      archiCity: '直管市林区'
+      archiCity: '仙桃市'
     }
   }).then(res => {
     console.log(res); // 输出接口返回的数据

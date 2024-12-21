@@ -61,7 +61,7 @@ const data = reactive({
 const load = () => {
   request.get('/system/architecture/list', {
     params: {
-      archiCity: '恩施州'
+      archiCity: '天门市'
     }
   }).then(res => {
     console.log(res); // 输出接口返回的数据
