@@ -100,7 +100,98 @@ const router = createRouter({
                     path: 'heritage',
                     name: 'front-heritage',
                     meta: {title: '遗产名录', needLogin: true},
-                    component: () => import('../views/front/heritage/Heritage.vue')
+                    component: () => import('../views/front/heritage/Heritage.vue'), children: [
+                        {
+                            path: '1',
+                            name: 'front-heritage-1',
+                            meta: { title: '遗产名录', needLogin: true },
+                            component: () => import('../views/front/heritage/Heritage1.vue'),
+                        },
+                        {
+                            path: '2',
+                            name: 'front-heritage-2',
+                            meta: { title: '遗产名录', needLogin: true },
+                            component: () => import('../views/front/heritage/Heritage2.vue'),
+                        },
+                        {
+                            path: '3',
+                            name: 'front-heritage-3',
+                            meta: { title: '遗产名录', needLogin: true },
+                            component: () => import('../views/front/heritage/Heritage3.vue'),
+                        },
+                        {
+                            path: '4',
+                            name: 'front-heritage-4',
+                            meta: { title: '遗产名录', needLogin: true },
+                            component: () => import('../views/front/heritage/Heritage4.vue'),
+                        },
+                        {
+                            path: '5',
+                            name: 'front-heritage-5',
+                            meta: { title: '遗产名录', needLogin: true },
+                            component: () => import('../views/front/heritage/Heritage5.vue'),
+                        },
+                        {
+                            path: '6',
+                            name: 'front-heritage-6',
+                            meta: { title: '遗产名录', needLogin: true },
+                            component: () => import('../views/front/heritage/Heritage6.vue'),
+                        },
+                        {
+                            path: '7',
+                            name: 'front-heritage-7',
+                            meta: { title: '遗产名录', needLogin: true },
+                            component: () => import('../views/front/heritage/Heritage7.vue'),
+                        },
+                        {
+                            path: '8',
+                            name: 'front-heritage-8',
+                            meta: { title: '遗产名录', needLogin: true },
+                            component: () => import('../views/front/heritage/Heritage8.vue'),
+                        },
+                        {
+                            path: '9',
+                            name: 'front-heritage-9',
+                            meta: { title: '遗产名录', needLogin: true },
+                            component: () => import('../views/front/heritage/Heritage9.vue'),
+                        },
+                        {
+                            path: '10',
+                            name: 'front-heritage-10',
+                            meta: { title: '遗产名录', needLogin: true },
+                            component: () => import('../views/front/heritage/Heritage10.vue'),
+                        },
+                        {
+                            path: '11',
+                            name: 'front-heritage-11',
+                            meta: { title: '遗产名录', needLogin: true },
+                            component: () => import('../views/front/heritage/Heritage11.vue'),
+                        },
+                        {
+                            path: '12',
+                            name: 'front-heritage-12',
+                            meta: { title: '遗产名录', needLogin: true },
+                            component: () => import('../views/front/heritage/Heritage12.vue'),
+                        },
+                        {
+                            path: '13',
+                            name: 'front-heritage-13',
+                            meta: { title: '遗产名录', needLogin: true },
+                            component: () => import('../views/front/heritage/Heritage13.vue'),
+                        },
+                        {
+                            path: '14',
+                            name: 'front-heritage-14',
+                            meta: { title: '遗产名录', needLogin: true },
+                            component: () => import('../views/front/heritage/Heritage14.vue'),
+                        },
+                        {
+                            path: '15',
+                            name: 'front-heritage-15',
+                            meta: { title: '遗产名录', needLogin: true },
+                            component: () => import('../views/front/heritage/Heritage15.vue'),
+                        }
+                    ]
                 },
                 {
                     path: 'redmap',

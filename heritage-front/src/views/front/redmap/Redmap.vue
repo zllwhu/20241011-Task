@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div style="display: flex; padding-top: 30px">
+    <div style="display: flex; padding-top: 30px; padding-bottom: 30px;">
       <el-card style="width: 220px; min-height: calc(100vh - 160px)">
         <el-menu router :default-active="activePath" style="border: 0" active-text-color="#f56c6c">
           <el-menu-item index="/front/redmap/spirit-1">
@@ -19,13 +19,13 @@
             <el-icon>
               <User/>
             </el-icon>
-            科学家精神基因
+            三牛精神基因
           </el-menu-item>
           <el-menu-item index="/front/redmap/spirit-4">
             <el-icon>
               <Coin/>
             </el-icon>
-            三牛精神基因
+            科学家精神基因
           </el-menu-item>
         </el-menu>
       </el-card>

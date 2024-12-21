@@ -17,7 +17,7 @@
       <el-menu router :default-active="activePath" mode="horizontal" active-text-color="#f56c6c">
         <el-menu-item index="/front/home">平台主页</el-menu-item>
         <el-menu-item index="/front/about/introduction">关于平台</el-menu-item>
-        <el-menu-item index="/front/heritage">遗产名录</el-menu-item>
+        <el-menu-item index="/front/heritage/1">遗产名录</el-menu-item>
         <el-menu-item index="/front/redmap/spirit-1">红色图谱</el-menu-item>
         <el-menu-item index="/front/archive">遗产档案</el-menu-item>
         <el-menu-item index="/front/digital/album">数字展示</el-menu-item>
@@ -48,6 +48,9 @@ const activePath = computed(() => {
   const path = route.path;
   if (route.path.startsWith("/front/about")) {
     return "/front/about/introduction";
+  }
+  if (route.path.startsWith("/front/heritage")) {
+    return "/front/heritage/1";
   }
   if (route.path.startsWith("/front/redmap")) {
     return "/front/redmap/spirit-1";
